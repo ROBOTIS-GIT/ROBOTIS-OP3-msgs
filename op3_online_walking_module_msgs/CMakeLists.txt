@@ -1,72 +1,37 @@
-################################################################################
-# Set minimum required version of cmake, project name and compile options
-################################################################################
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(op3_online_walking_module_msgs)
 
-################################################################################
-# Find catkin packages and libraries for catkin and system dependencies
-################################################################################
-find_package(catkin REQUIRED COMPONENTS
-  std_msgs
-  sensor_msgs
-  geometry_msgs
-  message_generation
+find_package(ament_cmake REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+
+find_package(rosidl_default_generators REQUIRED)
+
+set(msg_files
+  "msg/JointPose.msg"
+  "msg/KinematicsPose.msg"
+  "msg/FootStepCommand.msg"
+  "msg/FootStepArray.msg"
+  "msg/PreviewRequest.msg"
+  "msg/PreviewResponse.msg"
+  "msg/WalkingParam.msg"
+  "msg/Step2D.msg"
+  "msg/Step2DArray.msg"
 )
 
-################################################################################
-# Setup for python modules and scripts
-################################################################################
-
-################################################################################
-# Declare ROS messages, services and actions
-################################################################################
-add_message_files(
-  FILES
-  JointPose.msg
-  KinematicsPose.msg
-  FootStepCommand.msg
-  FootStepArray.msg
-  PreviewRequest.msg
-  PreviewResponse.msg
-  WalkingParam.msg
-  Step2D.msg
-  Step2DArray.msg
+set(srv_files
+  "srv/GetJointPose.srv"
+  "srv/GetKinematicsPose.srv"
+  "srv/GetPreviewMatrix.srv"
 )
 
-add_service_files(
-  FILES
-  GetJointPose.srv
-  GetKinematicsPose.srv
-  GetPreviewMatrix.srv
+rosidl_generate_interfaces(${PROJECT_NAME}
+  ${msg_files}
+  ${srv_files}
+  DEPENDENCIES std_msgs sensor_msgs geometry_msgs
 )
 
-generate_messages(
-  DEPENDENCIES
-  std_msgs
-  sensor_msgs
-  geometry_msgs
-)
+ament_export_dependencies(rosidl_default_runtime)
 
-################################################################################
-# Declare ROS dynamic reconfigure parameters
-################################################################################
-
-################################################################################
-# Declare catkin specific configuration to be passed to dependent projects
-################################################################################
-catkin_package(
-  CATKIN_DEPENDS std_msgs sensor_msgs geometry_msgs message_runtime
-)
-
-################################################################################
-# Build
-################################################################################
-
-################################################################################
-# Install
-################################################################################
-
-################################################################################
-# Test
-################################################################################
+ament_package()
