@@ -5,9 +5,9 @@ uint32  contrast                            # 0 - 255
 uint32  saturation                          # 0 - 255
 uint32  sharpness                           # 0 - 255
 uint32  gain                                # 0 - 255
-bool    focus_auto                          #
-int32  focus_absolute                       # -1 - 255
-uint32  exposure_auto                       #
-uint32  exposure_absolute                   # 0 - 255
-bool    white_balance_temperature_auto      #
+bool    focus_automatic_continuous          #
+int32   focus_absolute                      # -1 - 255
+uint32  auto_exposure                       #
+uint32  exposure_time_absolute              # 3 - 2047
+bool    white_balance_automatic             #
 uint32  white_balance_temperature           # 4000 - 6500
